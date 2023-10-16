@@ -8,7 +8,9 @@ function App() {
     <div className="App">
       {header}
       <br/>
-      <img src={cookbook_img} alt="image"/>
+      <img src={cookbook_img} alt=""/>
+      <br/>
+      <p>React app <b>Cookbook</b>.</p>
     </div>
   );
 }
