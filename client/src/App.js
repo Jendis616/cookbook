@@ -1,13 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
-import '../public/Cook_Book.jpg' Cook_Book;
+import cookbook_img from './img/Cook_Book.jpg';
 
-const image = {Cook_Book};
+const header = <h1>Cookbook</h1>
 
 function App() {
   return (
     <div className="App">
-      <h1></h1>
+      {header}
+      <br/>
+      <img src={cookbook_img} alt="image"/>
     </div>
   );
 }
