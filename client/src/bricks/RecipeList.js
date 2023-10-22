@@ -8,15 +8,14 @@ class RecipeList extends React.Component {
 
         function getRecipeList(recipeList) {
             return recipeList.map((recipe) => {
-                return <Recipe key={recipe.id} recipe={recipe} />
+                return <Col>
+                    <Recipe key={recipe.id} recipe={recipe} />
+                </Col>
             }); 
         }
 
-        return <Row xs={1} md={2} className="g-4">
-            
-                <Col>
-                    {getRecipeList(this.props.recipeList)}
-                </Col>
+        return <Row xs={2} md={4} className="g-4">
+                {getRecipeList(this.props.recipeList)}
         </Row>
     }
 }
