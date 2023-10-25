@@ -544,8 +544,6 @@ function App() {
       {header}
       <br/>
       <img src={cookbook_img} alt=""/>
-      <br/>
-      <p>React app <b>Cookbook</b>.</p>
       <RecipeList recipeList={recipeList} />
     </div>
   );

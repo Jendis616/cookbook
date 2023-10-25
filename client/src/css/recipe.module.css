@@ -1,16 +1,27 @@
 .recipe {
-    margin: 10px;
-    width: 18rem;
+    margin: 5px;
     border: light;
+    border-radius: 5%;
+    overflow: hidden;
 }
 
 .recipeHeader {
     text-align: center;
     font-weight: bold;
+    font-size: large;
+    margin-top: 12px;
 }
 
 .recipeDescription {
     text-align: left;
     padding-left: 16px;
     padding-right: 16px;
+    overflow: hidden;
+}
+
+.recipeDescriptionCollapsed {
+    text-align: left;
+    padding-left: 16px;
+    padding-right: 16px;
+    max-height: 10px;
 }

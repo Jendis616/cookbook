@@ -1,23 +1,83 @@
-import React from "react";
-import Recipe from "./Recipe";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+import React, { useState, useMemo } from "react";
+import Navbar from 'react-bootstrap/Navbar';
+import RecipeGridList from "./RecipeGridList";
+import RecipeTableList from "./RecipeTableList";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Icon from "@mdi/react";
+import { mdiTable, mdiViewGridOutline, mdiMagnify } from "@mdi/js";
 
-class RecipeList extends React.Component {
-    render() {
+function RecipeList(props) {
+    
+    const [viewType, setViewType] = useState("grid");
+    const isGrid = viewType === "grid";
+    const [searchBy, setSearchBy] = useState("");
+    const isSearching = searchBy !== "";
 
-        function getRecipeList(recipeList) {
-            return recipeList.map((recipe) => {
-                return <Col>
-                    <Recipe key={recipe.id} recipe={recipe} />
-                </Col>
-            }); 
-        }
-
-        return <Row xs={2} md={4} className="g-4">
-                {getRecipeList(this.props.recipeList)}
-        </Row>
+    function handleSearch(event) {
+        event.preventDefault();
+        setSearchBy(event.target["searchInput"].value);
     }
+
+    function handleSearchDelete(event) {
+        if (!event.target.value) setSearchBy("");
+    }
+
+    const getFilteredList = useMemo(() => {
+        return props.recipeList.filter((recipe) => {
+          return (
+            recipe.name
+              .toLocaleLowerCase()
+              .includes(searchBy.toLocaleLowerCase() ||
+            recipe.description
+              .toLocaleLowerCase()
+              .includes(searchBy.toLocaleLowerCase()))
+          );
+        });
+      }, [searchBy]);
+
+    return (
+        <div>
+            <Navbar>
+                <div className="container-fluid">
+                    <Navbar.Brand>Recipes</Navbar.Brand>
+                    <div>
+                        <Form className="d-flex" onSubmit={handleSearch}>
+                            <Form.Control
+                                id={"searchInput"}
+                                style={{ maxWidth: "100px" }}
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                                onChange={handleSearchDelete}
+                            />
+                            <Button style={{ marginRight: "8px" }} variant="outline-succes" type="sumbit">
+                                <Icon size={1} path={mdiMagnify} />
+                            </Button>
+
+                            <Button
+                                variant="outline-primary"
+                                onClick={() =>
+                                    setViewType((currentState) => {
+                                        if (currentState === "grid") return "table";
+                                        else return "grid";
+                                    })
+                                }
+                            >
+                                <Icon size={1} path={isGrid ? mdiTable : mdiViewGridOutline} />{" "}
+                                {isGrid ? "Tabulka" : "Grid"}
+                            </Button>
+                        </Form>
+                    </div>
+                </div>
+            </Navbar>
+            {isGrid ? (
+                <RecipeGridList recipeList={isSearching ? getFilteredList : props.recipeList} />
+            ) : (
+                <RecipeTableList recipeList={isSearching ? getFilteredList : props.recipeList} />
+            )}
+        </div>
+    );
 }
 
 export default RecipeList;
