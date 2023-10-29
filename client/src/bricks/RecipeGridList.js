@@ -8,7 +8,7 @@ function RecipeGridList(props) {
     function getRecipeList(recipeList) {
         return recipeList.map((recipe) => {
             return <Col>
-                <Recipe key={recipe.id} recipe={recipe} />
+                <Recipe key={recipe.id} recipe={recipe} ingredientList={props.ingredientList} />
             </Col>
         });
     }

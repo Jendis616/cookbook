@@ -3,6 +3,7 @@
     border: light;
     border-radius: 5%;
     overflow: hidden;
+    
 }
 
 .recipeHeader {
@@ -17,11 +18,13 @@
     padding-left: 16px;
     padding-right: 16px;
     overflow: hidden;
+    margin-top: 10px;
 }
 
 .recipeDescriptionCollapsed {
     text-align: left;
     padding-left: 16px;
     padding-right: 16px;
-    max-height: 10px;
+    max-height: 12px;
+    margin-top: 10px;
 }

@@ -7,8 +7,8 @@ function RecipeTableList(props) {
         return recipeList.map((recipe) => {
             return (
                 <tr key={recipe.id}>
-                    <td>{recipe.name}</td>
-                    <td>{recipe.description}</td>
+                    <td style={{textAlign: "right", fontWeight: "bold"}}>{recipe.name}</td>
+                    <td style={{textAlign: "left"}}>{recipe.description}</td>
                 </tr>
             );
         })

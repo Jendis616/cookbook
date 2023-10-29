@@ -9,6 +9,8 @@ import { mdiTable, mdiViewGridOutline, mdiMagnify } from "@mdi/js";
 
 function RecipeList(props) {
     
+    const recipeListName = "Recepty";
+
     const [viewType, setViewType] = useState("grid");
     const isGrid = viewType === "grid";
     const [searchBy, setSearchBy] = useState("");
@@ -28,10 +30,10 @@ function RecipeList(props) {
           return (
             recipe.name
               .toLocaleLowerCase()
-              .includes(searchBy.toLocaleLowerCase() ||
+              .includes(searchBy.toLocaleLowerCase()) ||
             recipe.description
               .toLocaleLowerCase()
-              .includes(searchBy.toLocaleLowerCase()))
+              .includes(searchBy.toLocaleLowerCase())
           );
         });
       }, [searchBy]);
@@ -40,7 +42,7 @@ function RecipeList(props) {
         <div>
             <Navbar>
                 <div className="container-fluid">
-                    <Navbar.Brand>Recipes</Navbar.Brand>
+                    <Navbar.Brand>{recipeListName}</Navbar.Brand>
                     <div>
                         <Form className="d-flex" onSubmit={handleSearch}>
                             <Form.Control
@@ -56,7 +58,7 @@ function RecipeList(props) {
                             </Button>
 
                             <Button
-                                variant="outline-primary"
+                                variant="light"
                                 onClick={() =>
                                     setViewType((currentState) => {
                                         if (currentState === "grid") return "table";
@@ -72,7 +74,7 @@ function RecipeList(props) {
                 </div>
             </Navbar>
             {isGrid ? (
-                <RecipeGridList recipeList={isSearching ? getFilteredList : props.recipeList} />
+                <RecipeGridList recipeList={isSearching ? getFilteredList : props.recipeList} ingredientList={props.ingredientList} />
             ) : (
                 <RecipeTableList recipeList={isSearching ? getFilteredList : props.recipeList} />
             )}
